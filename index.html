@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <title>Razorpay</title>
+    <style>
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-shift {
+            background-size: 200% 200%;
+            animation: gradient-shift 15s ease infinite;
+        }
+    </style>
+</head>
+<body x-data="{ cookieConsent: $persist(false) }">
+    <nav class="bg-blue-950" aria-label="Main navigation">
+        <div class="relative max-w-screen-xl mx-auto flex items-center justify-between px-4 border-b border-blue-300/20">
+            <a href="/" class="cursor-pointer py-7 pr-7">
+                <img 
+                src="./images/white.png"
+                width="125px"
+                height="30px"/>
+            </a>
+            
+            <div class="flex items-center space-x-8">
+                <ul class="flex space-x-6">
+                    <li class="text-white font-mullish py-7 hover:text-blue-400 cursor-pointer 
+                        transition-all duration-200 relative group">
+                        <div class="flex items-center">
+                            <a href="#">Payments</a>
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-0 w-full h-1 bg-blue-400 hidden group-hover:block transition-all duration-200"></div>
+                        <div class="absolute top-full left-0 w-64 bg-white shadow-xl rounded-lg py-2 
+                            opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+                            transition-all duration-200 ease-out origin-top pointer-events-none 
+                            group-hover:pointer-events-auto">
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">Payment Gateway</a>
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">Payment Links</a>
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">POS</a>
+                        </div>
+                    </li>
+                    <li class="text-white font-mullish py-7 hover:text-blue-400 cursor-pointer 
+                        transition-all duration-200 relative group">
+                        <div class="flex items-center">
+                            <a href="#">Banking+</a>
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-0 w-full h-1 bg-blue-400 hidden group-hover:block transition-all duration-200"></div>
+                        <div class="absolute top-full left-0 w-64 bg-white shadow-xl rounded-lg py-2 
+                            opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+                            transition-all duration-200 ease-out origin-top pointer-events-none 
+                            group-hover:pointer-events-auto">
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">Corporate Cards</a>
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">Current Accounts</a>
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">Payouts</a>
+                        </div>
+                    </li>
+                    <li class="text-white font-mullish py-7 hover:text-blue-400 cursor-pointer 
+                        transition-all duration-200 relative group">
+                        <div class="flex items-center">
+                            <a href="#">Payroll</a>
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-0 w-full h-1 bg-blue-400 hidden group-hover:block transition-all duration-200"></div>
+                        <div class="absolute top-full left-0 w-64 bg-white shadow-xl rounded-lg py-2 
+                            opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+                            transition-all duration-200 ease-out origin-top pointer-events-none 
+                            group-hover:pointer-events-auto">
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">Salary Management</a>
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">Compliance</a>
+                            <a href="#" class="block px-4 py-3 text-gray-800 hover:bg-blue-50">Tax Filing</a>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-white hover:text-blue-400 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 transition-all">Log In</a>
+                    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-semibold transition-all 
+                       focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 
+                       active:scale-95 transform">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-900 to-blue-700 py-20 animate-gradient-shift">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    Power your finance, grow your business
+                </h1>
+                <p class="text-gray-300 text-lg mb-8">
+                    Accept payments from customers. Automate payouts to vendors & employees. Never run out of working capital.
+                </p>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold transition-all">
+                    Sign Up Now
+                </button>
+            </div>
+            <div class="md:w-1/2">
+                <img src="./images/logo.png" alt="Dashboard Preview" class="w-full max-w-xl mx-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Solutions -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Complete Payment Solutions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Payment Gateway</h3>
+                    <p class="text-gray-600">Accept payments via 100+ payment methods with easy integration</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Instant Settlements</h3>
+                    <p class="text-gray-600">Get settlements within seconds with RazorpayX powered banking</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Smart Dashboard</h3>
+                    <p class="text-gray-600">Real-time analytics and insights for your business finances</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Secure Platform</h3>
+                    <p class="text-gray-600">PCI DSS Level 1 certified with 24/7 fraud monitoring</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banking Solutions -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="./images/indianFlag.jpeg" alt="Banking Solutions" class="rounded-xl shadow-lg">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6">Banking Solutions for New India</h2>
+                    <p class="text-gray-600 mb-8">
+                        Experience the future of banking with automated vendor payments, payroll management, 
+                        and smart expense tracking. Get corporate credit cards and loans tailored for your business.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-semibold mb-3">Current Account</h3>
+                            <p class="text-sm text-gray-500">Smart banking with 7% interest</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-3">Corporate Cards</h3>
+                            <p class="text-sm text-gray-500">Expense management made easy</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-3">Capital Loans</h3>
+                            <p class="text-sm text-gray-500">Instant working capital access</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-3">Payroll</h3>
+                            <p class="text-sm text-gray-500">Automated salary disbursements</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+                <div class="col-span-2">
+                    <img src="./images/white.png" class="h-8 mb-4" alt="Razorpay Logo">
+                    <p class="text-sm">Razorpay is the only payments solution in India that allows businesses to accept, process and disburse payments.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Products</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Payment Gateway</a></li>
+                        <li><a href="#" class="hover:text-white">RazorpayX</a></li>
+                        <li><a href="#" class="hover:text-white">Capital</a></li>
+                        <li><a href="#" class="hover:text-white">Payroll</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Developers</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white">API Reference</a></li>
+                        <li><a href="#" class="hover:text-white">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm">
+                <p>&copy; 2024 Razorpay Clone. Built for educational purposes. No right reserved</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Cookie Consent -->
+    <div x-show="!cookieConsent" class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4" role="dialog" aria-labelledby="cookie-consent">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div class="text-sm" id="cookie-consent">
+                We use cookies to ensure you get the best experience. 
+                <a href="/privacy" class="text-blue-400 hover:text-blue-300 underline">Learn more</a>
+            </div>
+            <div class="flex space-x-4">
+                <button @click="cookieConsent = true" 
+                    class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-sm"
+                    aria-label="Accept all cookies">
+                    Accept All
+                </button>
+                <button @click="cookieConsent = true" 
+                    class="border border-gray-500 hover:bg-gray-700 px-4 py-2 rounded-md text-sm"
+                    aria-label="Reject non-essential cookies">
+                    Necessary Only
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen Reader Skip -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:px-4 focus:py-2 focus:bg-white focus:text-blue-600">
+        Skip to main content
+    </a>
+</body>
+</html>
